@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Set height to 100% for body and html to use full viewport height */
+body {
+    background-image: url('https://scontent.xx.fbcdn.net/v/t1.15752-9/462544626_536224996014176_3166878057817183399_n.png?stp=dst-png_s552x414&_nc_cat=104&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeG2SPv0FFM_7fu66ZsbfhaQBlKGJYcZdJUGUoYlhxl0lTYmtNPKT2CKpcnAxSaRbuCTbeXsJuZtwyUU8cCJGQQi&_nc_ohc=IJ3eMW7SUnIQ7kNvgEE4L9u&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.xx&_nc_gid=ASZmw1G-qUYM1wyD3LnhHLX&oh=03_Q7cD1QFdOqNPi8zLx3t630vPs2denqAG81u7zx780m0m05UyYQ&oe=673C9121'); /* Replace with your image URL */
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Keeps the background fixed during scroll */
+    height: 100%; /* Ensures the body takes up full height */
+    margin: 0; /* Resets default margin */
+    display: flex; /* Enables flexbox layout */
+    flex-direction: column; /* Arranges children in a column */
+}
+        /* Flex-grow for content area to push footer down */
+        body {
+
+            flex: 1;
+        }
+
+        /* Navbar styling */
+        .navbar {
+
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 5px solid #fff;
+            background-color: #ffffff; /* Black */
+        }
+
+        .site-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #F59E0B; /* Yellow */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            font-size: 1.125rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            color: #000000; /* Light Green */
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color:#65A30D; /* Lighter Green */
+        }
+
+        .nav-button {
+
+            padding: 0.75rem 1.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .nav-button.admin-panel { background-color: #059669; } /* Green */
+        .nav-button.admin-panel:hover { background-color: #65A30D; }
+
+        .nav-button.my-products, .nav-button.inbox { background-color: #65A30D; } /* Light Green */
+        .nav-button.my-products:hover,.nav-button.inbox:hover { background-color: #65A30D; }
+
+        .nav-button.logout { background-color: #e73d3d; } /* Gray */
+        .nav-button.logout:hover { background-color: #65A30D; }
+
+        .nav-button.signup { background-color: #4D7C0F; } /* Light Green */
+        .nav-button.signup:hover { background-color: #65A30D; }
+
+        .nav-button.login { background-color: #4D7C0F; } /* Gray */
+        .nav-button.login:hover { background-color: #65A30D; }
+
+        /* Footer styling */
+        .footer {
+
+            padding: 1.5rem;
+            background-color: #fff; /* Black */
+            color: #D1FAE5; /* Light Green */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-menu {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            color: #4D7C0F; /* Yellow */
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #000; /* Lighter Yellow */
+        }
+
+        .footer-copyright {
+            font-size: 0.875rem;
+            color: #4D7C0F; /* Light Green */
+            text-align: center;
+        }
+
+        /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+            .footer-menu {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-link {
+                font-size: 1rem;
+            }
+
+            .footer {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-menu {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .footer-link {
+                font-size: 0.875rem;
+            }
+
+            .footer {
+                padding: 0.75rem;
+            }
+
+            .footer-copyright {
+                font-size: 0.75rem;
+            }
+        }
+        .invisible {
+            visibility: hidden; /* Hides the image but keeps its space */
+        }
+    </style>
+    
+    <title>{% block title %}{% endblock %} | AOM</title>
+</head>
+
+<body class="flex flex-col min-h-screen">
+    <nav class="navbar">
+        {% if user.is_authenticated %}
+            <a href="/" class="text-xl font-semibold"><img src="https://cpe-bucket-aom.s3.ap-southeast-2.amazonaws.com/img/logo.png" alt="Logo" class="logo" /></a>
+        {% else %}
+            <!-- Empty img tag to preserve space -->
+            <a href="/" class="text-xl font-semibold"><img src="https://cpe-bucket-aom.s3.ap-southeast-2.amazonaws.com/img/logo.png" alt="Logo" class="logo" /></a>
+            <a href="{% url 'core:signup' %}" class="nav-button signup">
+                <i class="fas fa-user-plus"></i> Sign up
+            </a>
+            <a href="{% url 'core:login' %}" class="nav-button login">
+                <i class="fas fa-user"></i> Log in
+            </a>
+        {% endif %}
+        
+        <div class="nav-links">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'item:new' %}" class="nav-link">
+                    <i class="fas fa-plus-circle"></i> New Items
+                </a>
+                <a href="{% url 'item:items' %}" class="nav-link">
+                    <i class="fas fa-th-list"></i> Browse
+                </a>
+            {% endif %}
+    
+            {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'core:admin_dashboard' %}" class="nav-button admin-panel">
+                        <i class="fas fa-cogs"></i> Admin Panel
+                    </a>
+                {% endif %}
+                <a href="{% url 'inbox:inbox' %}" class="nav-button inbox">
+                    <i class="fas fa-inbox"></i> Inbox
+                </a>
+                <a href="{% url 'dashboard:index' %}" class="nav-button my-products">
+                    <i class="fas fa-box"></i> My Products
+                </a>
+                <a href="{% url 'core:logout' %}" class="nav-button logout">
+                    <i class="fas fa-box"></i> Logout
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+    
+
+    <main class="content flex-grow px-6 py-6">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer border-t border-gray-300">
+    <div class="footer-links">
+        <ul class="footer-menu">
+            <li><a href="{% url 'core:about' %}" class="footer-link">
+                <i class="fas fa-info-circle"></i> About Us
+            </a></li>
+            <li><a href="{% url 'core:contact' %}" class="footer-link">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a></li>
+            <li><a href="{% url 'core:privacy' %}" class="footer-link">
+                <i class="fas fa-user-shield"></i> Privacy Policy
+            </a></li>
+            <li><a href="{% url 'core:term_use' %}" class="footer-link">
+                <i class="fas fa-file-contract"></i> Terms of Use
+            </a></li>
+        </ul>
+    </div>
+    <div class="footer-copyright">
+        Copyright © 2024 AOM. All Rights Reserved.
+    </div>
+</footer>
+
+</body>
+</html>
