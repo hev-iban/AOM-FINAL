@@ -61,7 +61,7 @@ def new(request):
 
     return render(request, 'item/form.html', {
         'form': form,
-        'title': 'New item',
+
     })
 
 # View to edit an existing item

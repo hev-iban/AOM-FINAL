@@ -166,7 +166,7 @@ body {
             visibility: hidden; /* Hides the image but keeps its space */
         }
     </style>
-    
+
     <title>{% block title %}{% endblock %} | AOM</title>
 </head>
 
@@ -184,17 +184,17 @@ body {
                 <i class="fas fa-user"></i> Log in
             </a>
         {% endif %}
-        
+
         <div class="nav-links">
             {% if request.user.is_authenticated %}
                 <a href="{% url 'item:new' %}" class="nav-link">
-                    <i class="fas fa-plus-circle"></i> New Items
+                    <i class="fas fa-plus-circle"></i> Add Items
                 </a>
                 <a href="{% url 'item:items' %}" class="nav-link">
                     <i class="fas fa-th-list"></i> Browse
                 </a>
             {% endif %}
-    
+
             {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
                     <a href="{% url 'core:admin_dashboard' %}" class="nav-button admin-panel">
@@ -213,7 +213,7 @@ body {
             {% endif %}
         </div>
     </nav>
-    
+
 
     <main class="content flex-grow px-6 py-6">
         {% block content %}
